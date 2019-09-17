@@ -1,17 +1,17 @@
 pipeline {
-    agent {
-        docker {
-            image 'maven:3.6.2'
-            args '-v /root/.m2:/root/.m2'
-        }
+    agent any
+	tools {
+        maven 'Maven3.6.2' 
     }
-	environment {
-		PATH+EXTRA = '/usr/sbin:/usr/bin:/sbin:/bin'
-	}
     stages {
-		stage('Echo') {
+		stage('EchoPath') {
             steps {
                echo "PATH is: $PATH"
+            }
+        }
+		stage('Version') {
+            steps {
+               sh 'mvn --version'
             }
         }
         stage('Build') {
