@@ -6,9 +6,14 @@ pipeline {
         }
     }
 	environment {
-		PATH+EXTRA = '/usr/sbin:/usr/bin:/sbin:/bin'
+		PATH= '/usr/sbin:/usr/bin:/sbin:/bin:$PATH'
 	}
     stages {
+		stage('Echo') {
+            steps {
+               echo "PATH is: $PATH"
+            }
+        }
         stage('Build') {
             steps {
                 sh 'mvn -B -DskipTests clean package'
